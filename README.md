@@ -1,53 +1,39 @@
-# Kickstarting with Excel
+# Refactor VBA Code and Measure Performance
 
 ## Overview of Project
 
 ### Purpose
 
-This project documents the outcomes of funding campaigns for theatre productions, showing how their funding success varies based on the month in which campaigns are launched and the size of their funding goals. It is based on a dataset of Kickstarter campaigns from 2009 to 2017 which included 1,369 theatre productions, of which 1,047 were plays. This dataset included the name and description for each Kickstarter campaign, the funding goal, funds pledged, launch date of the funding campaign, and several additional variables not used in this project.
+This project constructs a VBA program for analyzing stock data, compiling the starting price, ending price, and total trading volumes for 12 green energy stocks. The analysis was conducted on a data set with 6,000 daily price observations on the 12 stocks for the years 2017-2018. The VBA program was tested on this small data set, then refactored to be able to run on larger datasets.
 
 ## Analysis and Challenges
 
-### Analysis of Outcomes Based on Launch Date
+### Analysis of Stock Data
 
-To analyze the relationship between funding campaign success and the month in which they were launched, this project includes a pivot table displaying the number of campaigns which succeeded, failed, or were canceled based on the month in which the campaigns were launched. This table is presented in a line graph titled “Theater Outcomes Based on Launch Date” which displays the number of funding campaigns on the y-axis and the launch month of the campaigns on the x-axis. 
+The dataset contained daily information on 12 stocks for the calendar years of 2017 and 2018; data fields included the stock ticker, date, opening price, closing price, adjusted closing price, daily high & low prices, and daily trading volume. 
 
-Theater_Outcomes_by_Launch_Date.png
-
-This graph allows the viewer to visually compare the number of successful, failed, and canceled campaigns in each month of the year. The highest success rate for funding campaigns occurs in the month of May when approximately 2/3 of all campaigns (111 out of 166) succeed; this is also the peak month for launching campaigns. The number of successful campaigns continually declines from June through December (to a low of 37), then rebounds to an intermediate range (56 to 71) in January through April.
-
-The lowest success rates occur in the month of December when only about 1/2 (37 out of 75) of all campaigns achieve their funding goal. The number of failed campaigns per month is more stable, ranging from a low of 31 in November to a high of 52 in May. Canceled campaigns are relatively uncommon; only 37 cancellations occurred out of 1,369 funding campaigns.
-
-### Analysis of Outcomes Based on Goals
-
-To analyze the relationship between funding campaign success and the size of funding goals, this project includes a pivot table displaying the number of campaigns which succeeded, failed, or were canceled based across twelve funding levels ranging from less than $1,000 to greater than $50,000. This table is presented in a line graph titled “Outcomes Based on Goal” which displays the percentage of funding campaigns on the y-axis and the size of their funding goals along the x-axis. 
-
-Outcomes_Based_on_Goal.png
-
-This graph allows the viewer to visually compare the percentages of successful, failed, and canceled campaigns based on the size of their funding goals. The highest funding success rates occur in campaigns seeking less than $5,000. The proportion of failed campaigns rises steeply as the funding goal increases, surpassing the number of successful campaigns at funding goals above $20k. 
-
-The apparent high rate of success for campaigns in the $35-45k range is based on a very small number of observations (9 plays; less than 1% of the dataset) and could simply be an outlier. If the funding ranges in the table were broadened (e.g., <$5k, $5-15k, $15-25k, $25k> then this apparent spike in success rates would disappear. However, there is a possibility that this result is driven by a cohort of well-run theatre companies that operate at that scale, but we could only support such a conclusion with additional data that identified those specific companies. Funding targets exceeding $45,000 are most likely to fail; only two out of seventeen campaigns in this range achieved their funding goal.
+VBA scripts were written to create several new variables, including total trading annual trading volumes, annual starting and ending prices, and annual return (i.e., difference between the starting and ending price for the year) on each stock. These new variables were compiled in tables included in the results section below.
 
 ### Challenges and Difficulties Encountered
 
-This analysis lacks predictive value due to the limited data available; cursory statistics on funding campaign success indicate that success is maximized by starting a Kickstarter campaign in May and seeking less than $5,000 in funding. It provides no other insights for how to improve chances for successful fundraising. 
+The refactoring step included creation of a numeric stock ticker index to replace the use of individual stock tickers for compiling results. I was unable to make this index work properly when trying to loop through the data arrays, so the final VBA script "AllStocksAnalysisRefactored" fails to extract the annual reporting data after the first stock. The first VBA script "yearValueAnalysis" works properly, providing correct annual reports for all stocks, formatted and color coded for ease of use.
 
 ## Results
 
-- What are two conclusions you can draw about the Outcomes based on Launch Date?
+- Results for 2017. This was an excellent year for green energy; the 12 stocks averaged returns of 67%, ranging from a low of -7% to a high of +199%.
 
-  May is the best month for launching Kickstarter funding campaigns for theater productions; this is when the most campaigns are launched and when the probability for success is the greatest. December is the worst month; when the fewest campaigns are launched and when the probability for success is lowest.
+https://github.com/benniehana111/stock-analysis/blob/main/Resources/2017%20stock%20analysis.png
 
-- What can you conclude about the Outcomes based on Goals?
+- Results for 2018. The green energy market turned sharply downward in 2018; the 12 stocks averaged returns of -8.5%, ranging from a low of 63% to a high of +84%.
 
-  Funding goals of less than $5,000 are relatively easy to achieve; funding success becomes progressively more difficult as goals increase beyond $5,000. More data on the fundraising organizations is needed to identify what factors drive success of theater Kickstarter campaigns for larger amounts.
+https://github.com/benniehana111/stock-analysis/blob/main/Resources/2018%20stock%20analysis.png.
 
-- What are some limitations of this dataset?
+- Advantages and disadvantages of refactoring code in general.
 
-  The dataset provides few details on the internal attributes of each funding campaign; the only variables are the number of financial backers and whether a production was a “staff pick” or “spotlight.” There is no information on the individuals and organizations associated with each funding campaign, so we can’t tell if there are people with track records of success or failure. 
+Refactoring code offers the potential advantage of reducing coding steps, coding errors, required computational time and resources, and improved readability. The principal disadvantage are the extra programming time required, and the potential for new errors to be introduced.
 
-- What are some other possible tables and/or graphs that we could create?
+- Advantages and disadvantages of the original and refactored VBA script.
 
-  We should merge the two data threads analyzed here to examine if the size of funding goals varies by month and if there is any correlation between fundraising success, timing, and the size of fundraising goals. A first cut at this analysis would come include four line graphs similar to “Theater Outcomes by Launch Date,” with each graph corresponding to a fundraising level (e.g., <$5k, $5-15k, $15-25k, $50k>).
+The original VBA script performed as required with no errors. The refactored script should be capable of performing faster on large datasets, but I was unable to get the more advanced programming loop to work in the allotted time.
 
-  We should map funding success rates against other variables provided in the data set – country, staff pick, spotlight, # of backers, and average donation size – to see if there are any correlations. These graphs would mirror the form of the “Outcomes Based on Goal” graph, replacing the x-axis value (funding goal) with other variables (or combinations of variables).
+
